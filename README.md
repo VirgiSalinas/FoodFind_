@@ -106,75 +106,73 @@ Abrí <http://localhost:3000> en el navegador y deberías ver:
 
 ---
 
-## 🌿 Cómo trabajar en equipo
+🌿 Cómo trabajar en equipo
+Las ramas del proyecto
+Rama	Para qué es
+main	Versión estable: lo que se entrega o se muestra. Solo se actualiza con un Pull Request desde develop cuando hay una versión lista.
+develop	Rama de trabajo diario. De acá salen todas las ramas nuevas y acá vuelven con un Pull Request.
+feature/..., fix/...	Ramas temporales, una por tarea. Se borran después del merge.
 
-La rama principal es **`develop`**. **Nadie trabaja directamente sobre ella**: cada tarea se hace en su propia rama y se une mediante un Pull Request.
+Las ramas main y develop están protegidas:
 
-### Antes de empezar una tarea nueva
+No se puede hacer git push directo a ellas (GitHub lo rechaza).
+Todo cambio entra por Pull Request y necesita 1 aprobación de otra persona del equipo.
+No se pueden borrar ni reescribir con --force.
 
-```bash
+Las ramas se crean por tarea, no por persona: cada uno va a crear muchas ramas a lo largo del proyecto. Antes de empezar, avisá en el grupo qué tarea tomás para no pisarse.
+
+Antes de empezar una tarea nueva
+bash
 git checkout develop               # ir a la rama principal
 git pull                           # traer los últimos cambios del equipo
 git checkout -b feature/nombre-de-la-tarea
-```
 
 Nombres de rama sugeridos:
 
-- `feature/...` → algo nuevo (ej: `feature/login`, `feature/modelo-restaurante`)
-- `fix/...` → arreglar un error (ej: `fix/validacion-email`)
-
-### Mientras trabajás
+feature/... → algo nuevo (ej: feature/login, feature/modelo-restaurante)
+fix/... → arreglar un error (ej: fix/validacion-email)
+Mientras trabajás
 
 Guardá tu avance con commits chicos y descriptivos:
 
-```bash
+bash
 git add .
 git commit -m "Agrega modelo de usuario"
-```
-
-### Cuando terminás
-
-```bash
+Cuando terminás
+bash
 npm run typecheck                          # que no haya errores
 git push -u origin feature/nombre-de-la-tarea
-```
 
 Después, en GitHub:
 
-1. Te va a aparecer un botón **"Compare & pull request"**. Hacé clic.
-2. Verificá que diga **base: `develop`** ← **compare: tu rama**.
-3. Escribí un título y una breve descripción de lo que hiciste.
-4. Creá el Pull Request y avisá al grupo para que alguien lo revise.
-5. Una vez aprobado, se hace **Merge** y se puede borrar la rama.
+Te va a aparecer un botón "Compare & pull request". Hacé clic.
+⚠️ Cambiá la base a develop. GitHub propone main por defecto: arriba del formulario, en el desplegable base, elegí develop. Tiene que quedar base: develop ← compare: tu rama.
+Escribí un título y una breve descripción de lo que hiciste.
+Creá el Pull Request y avisá al grupo para que alguien lo revise.
+Otra persona lo revisa y lo aprueba (Files changed → Review changes → Approve). No podés aprobar tu propio PR.
+Una vez aprobado, se hace Merge y se puede borrar la rama.
 
-### Si `develop` cambió mientras trabajabas
+💡 Si por error abriste el PR hacia main, no pasa nada: dentro del PR tocá Edit (al lado del título) y cambiá la base a develop.
 
-```bash
+Si develop cambió mientras trabajabas
+bash
 git checkout develop
 git pull
 git checkout feature/tu-rama
 git merge develop
-```
 
 Si hay conflictos, VS Code los marca en los archivos: elegí qué versión dejar, guardá y hacé commit.
 
----
-
-## 📏 Reglas del equipo
-
-1. **Nunca subir el `.env` ni `node_modules`.** Antes de cada commit, `git status` no los tiene que mostrar.
-2. **Si instalás una librería nueva** (`npm install algo`), subí también los cambios de `package.json` y `package-lock.json`, y avisá al grupo. Los demás tienen que correr `npm install` después de hacer `git pull`.
-3. **Siempre `git pull` en `develop` antes de crear una rama nueva**, para partir del código más actualizado.
-4. **Imports con extensión `.js`.** El proyecto usa ES Modules, así que al importar archivos propios hay que poner `.js` aunque el archivo sea `.ts`:
-
-   ```ts
+📏 Reglas del equipo
+Nunca subir el .env ni node_modules. Antes de cada commit, git status no los tiene que mostrar.
+Si instalás una librería nueva (npm install algo), subí también los cambios de package.json y package-lock.json, y avisá al grupo. Los demás tienen que correr npm install después de hacer git pull.
+Siempre git pull en develop antes de crear una rama nueva, para partir del código más actualizado. Nunca crear ramas desde main.
+Imports con extensión .js. El proyecto usa ES Modules, así que al importar archivos propios hay que poner .js aunque el archivo sea .ts:
+ts
    import userRoutes from "./routes/user.routes.js";  // ✅ correcto
    import userRoutes from "./routes/user.routes";     // ❌ da error
-   ```
 
-   Las librerías (`express`, `mongoose`, etc.) se importan normal, sin extensión.
-
----
+Las librerías (express, mongoose, etc.) se importan normal, sin extensión.
 
 ## 📁 Estructura del proyecto
 
