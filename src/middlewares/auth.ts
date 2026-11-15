@@ -31,7 +31,8 @@ export const verificarToken = (req: Request, _res: Response, next: NextFunction)
 
     let payload: string | jwt.JwtPayload;
     try {
-        payload = jwt.verify(header.slice("Bearer ".length), config.jwtSecret);
+        // Solo acepta tokens firmados con HS256 (el mismo algoritmo que usa jwt.sign al hacer login)
+        payload = jwt.verify(header.slice("Bearer ".length), config.jwtSecret, { algorithms: ["HS256"] });
     } catch {
         throw HttpError.noAutorizado();
     }
