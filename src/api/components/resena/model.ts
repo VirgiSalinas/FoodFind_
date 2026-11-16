@@ -1,4 +1,4 @@
-import { Schema, model, Types} from 'mongoose';
+import { Schema, model, Types} from "mongoose";
 
 export interface IResena {
     usuario: Types.ObjectId;
@@ -8,8 +8,8 @@ export interface IResena {
 }
 
 const resenaSchema = new Schema<IResena>({
-    usuario: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true },
-    plato: { type: Schema.Types.ObjectId, ref: 'Plato', required: true },
+    usuario: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
+    plato: { type: Schema.Types.ObjectId, ref: "Plato", required: true },
     puntuacion: { 
         type: Number, 
         required: true, 
@@ -28,5 +28,5 @@ const resenaSchema = new Schema<IResena>({
 resenaSchema.index({ usuario: 1, plato: 1 }, { unique: true });
 resenaSchema.index({plato : 1});
 
-export const Resena = model<IResena>('Resena', resenaSchema);
+export const Resena = model<IResena>("Resena", resenaSchema);
 

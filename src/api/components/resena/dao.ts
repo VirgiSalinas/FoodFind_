@@ -1,5 +1,5 @@
-import { Types } from 'mongoose';
-import { Resena } from './model.js';
+import { Types } from "mongoose";
+import { Resena } from "./model.js";
 
 type DatosNuevos = {
     usuario: string;
