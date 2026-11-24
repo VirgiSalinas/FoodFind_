@@ -6,7 +6,7 @@ export const crearResenaSchema = z.object({
     comentario: z.string().trim().min(10).max(200)
 });
 
-export const EditarResenaSchema = crearResenaSchema.
+export const editarResenaSchema = crearResenaSchema.
 omit({plato: true})
 .partial()
 .refine((datos) => datos.puntuacion !== undefined || datos.comentario !== undefined, {
@@ -14,4 +14,4 @@ omit({plato: true})
 });
 
 export type CrearResenaDto = z.infer<typeof crearResenaSchema>;
-export type EditarResenaDto = z.infer<typeof EditarResenaSchema>;
+export type EditarResenaDto = z.infer<typeof editarResenaSchema>;
