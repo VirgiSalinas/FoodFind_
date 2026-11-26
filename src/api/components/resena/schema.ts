@@ -1,7 +1,7 @@
 import {z}  from "zod";
 
 export const crearResenaSchema = z.object({
-    plato: z.string().regex(/^[0-9a-fA-F]{24}$/, "El ID del plato es inválidio"),
+    plato: z.string().regex(/^[0-9a-fA-F]{24}$/, "El ID del plato es invalido"),
     puntuacion: z.number().min(0.5).max(5).multipleOf(0.5),
     comentario: z.string().trim().min(10).max(200)
 });

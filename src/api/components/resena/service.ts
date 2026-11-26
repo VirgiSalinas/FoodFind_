@@ -6,7 +6,7 @@ export const editar = async (id: string, usuarioId: string, datos: EditarResenaD
   const resena = await resenaDao.buscarPorId(id);
   if (!resena) throw HttpError.noEncontrado("La reseña no existe");
   if (resena.usuario.toString() !== usuarioId) {
-    throw new HttpError(403, "Solo podés editar tus propias reseñas");
+    throw HttpError.prohibido("Solo podés editar tus propias reseñas");
   }
   return resenaDao.actualizar(id, datos);
 };
@@ -17,7 +17,7 @@ export const eliminar = async (id: string, usuarioId: string, rol: string) => {
 
   
   if (resena.usuario.toString() !== usuarioId && rol !== "admin") {
-    throw new HttpError(403, "No tenés permiso para borrar esta reseña");
+    throw HttpError.prohibido("No tenés permiso para borrar esta reseña");
   }
   await resenaDao.eliminar(id);
 };
