@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/*
+  Paleta de KARU.
+  Cada variable --color-nombre crea clases de Tailwind:
+  --color-verde-monte → bg-verde-monte, text-verde-monte, border-verde-monte...
+*/
+@theme {
+  --color-verde-monte: #344a36;
+  --color-crema: #f3ebdd;
+  --color-crema-oscura: #e9dfcc;
+  --color-superficie: #fffdf8;
+  --color-terracota: #d47b52;
+  --color-terracota-oscura: #a24f2b;
+  --color-maiz: #e6bd69;
+  --color-carbon: #1f2a20;
+  --color-carbon-suave: #5c6658;
+  --color-borde: #8a7d66;
+  --color-error: #7a3517;
+  --color-error-fondo: #f6dccf;
+}
+
+/*
+  Tipografías.
+  "inline" es necesario porque estas variables las crea next/font
+  en layout.tsx, no este archivo.
+*/
+@theme inline {
+  --font-sans: var(--font-nunito-sans);
+  --font-titulo: var(--font-poppins);
+  --font-marca: var(--font-amaranth);
+}
